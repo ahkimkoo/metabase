@@ -24,7 +24,7 @@ _makeRequest(method, url, headers, body, data, options) {
     if(body)body = body.replace(/\$\{([^\}]+)}/ig,(m,x)=>{return eval(x);});//add this line
     return new Promise((resolve, reject) => {
 ```
-So it supports js expressions, we can use mongodb's index to filter the date using a statement similar to the following:
+So it supports js expressions (such as "${...}"), we can use mongodb's index to filter the date using a statement similar to the following:
 ```
 db.user_actions.aggregate([{"$match":{"timestamp":{"$lt":ISODate("${new Date(new Date().setHours(0,0,0,0)).toISOString()}"),"$gte":ISODate("${new Date(new Date(new Date().getTime()-86400000).setHours(0,0,0,0)).toISOString()}")}}}])
 ```
