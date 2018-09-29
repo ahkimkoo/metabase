@@ -87,7 +87,7 @@ class Overworld extends React.Component {
             let pinnedDashboards = items.filter(
               d => d.model === "dashboard" && d.collection_position != null,
             );
-
+            /*
             if (!pinnedDashboards.length > 0) {
               return (
                 <CandidateListLoader>
@@ -121,6 +121,7 @@ class Overworld extends React.Component {
                 </CandidateListLoader>
               );
             }
+            */
 
             if (items.length === 0) {
               return null;

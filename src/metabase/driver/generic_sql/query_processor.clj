@@ -286,8 +286,7 @@
   "Returns a seq of honeysql join clauses, joining to `table-or-query-expr`. `jt-or-jq` can be either a `JoinTable` or
   a `JoinQuery`"
   [table-or-query-expr {:keys [table-name pk-field source-field schema join-alias] :as jt-or-jq}]
-  (let [source-table-id                                  (mbql.u/query->source-table-id *query*)
-        {source-table-name :name, source-schema :schema} (qp.store/table source-table-id)]
+  (let [{source-table-name :name, source-schema :schema} (qputil/get-in-query *query* [:source-table])]
     [[table-or-query-expr (keyword join-alias)]
      [:=
       (hx/qualify-and-escape-dots source-schema source-table-name (:field-name source-field))
